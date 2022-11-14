@@ -1,25 +1,20 @@
-# cs1302-hw08 Fun with Components and Containers
+# cs1302-hw8.5 Threaded Reader App
 
 ![Approved for: Fall 2022](https://img.shields.io/badge/Approved%20for-Fall%202022-darkgreen)
 
-> Words, words, words.
-> **-- William Shakespeare, _Hamlet_**
-
-This homework explores creating graphical user interfaces (GUIs) using the JavaFX library. Students
-will create an interactive, tabbed GUI that loads images (one per tab) from a specified URL. The program
-supports images in BMP, GIF, JPEG, and PNG formats. Students will need to create custom JavaFX components
-by extending (inheriting from) existing JavaFX components.
+This homework explores creating responsive graphical user interfaces (GUIs) using the JavaFX library and Java threads. 
+The application displays the contents of a text (`.txt`) found at the URL provided by the user. However, the starter code 
+hangs (doesn't allow the user to interact with the application) while the data in the text file is being downloaded. 
+Students must use Java threads to ensure that the GUI remains responsive while the text is downloading.
 
 ## Course-Specific Learning Outcomes
 
-* **LO2.e:** (Partial) Utilize existing generic methods, interfaces, and classes in a software solution.
 * **LO7.a:** (Partial) Design and implement a graphical user interface in a software project.
 
 ## References and Prerequisites
 
 * [CSCI 1302 JavaFX Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/javafx/javafx.md)
-* [CSCI 1302 JavaFX Custom Component Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/components/components.md)
-* [JavaFX Bookmarks](https://github.com/cs1302uga/cs1302-tutorials/blob/master/javafx/javafx-bookmarks.md)
+* [CSCI 1302 Threads Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/threads/brief-intro-threads.md)
 * [JavaFX API Documentation](https://openjfx.io/javadoc/17/)
 
 ## Questions
@@ -36,54 +31,75 @@ will serve as a helpful study guide for the exam.
 
 ### Getting Started
 
-1. Use Git to clone the repository for this exercise onto Odin into a subdirectory called `cs1302-hw08`:
+1. Use Git to clone the repository for this exercise onto Odin into a subdirectory called `cs1302-hw8.5`:
 
    ```
-   $ git clone --depth 1 https://github.com/cs1302uga/cs1302-hw08.git
+   $ git clone --depth 1 https://github.com/cs1302uga/cs1302-hw8.5.git
    ```
 
 ## Exercise Steps
 
 ### Checkpoint 1 Steps
 
-1. Take a few minutes to look over the starter code provided to you. You should notice that it is a completed implementation of the
-   code written by the end of the
-   [CSCI 1302 JavaFX Custom Component Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/components/components.md),
-   assigned as a reading last week. In that tutorial, you created the following containment hierarchy using your custom `ImageLoader`
-   component:
+1. Take a few minutes to look over the starter code provided to you.
 
+1. Compile and run the code using the provided compile script (`compile.sh`) which uses 
+   [Maven](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/maven.md) commands.
+
+1. The default URL in the application points to a plain-text UTF-8 version of __The Adventures of Sherlock
+   Holmes__ by Sir Arthur Conan Doyle. **Before you click load please note:**
+   * We have added artificial delay to the application, so downloading the text will take longer than usual. 
+     The delay will help us see the impact of long-running event handlers. In this case, the long-running
+     event handler runs when the button is clicked. While the event handler is executing (to download the text),
+     nothing else can occur in the application.
+   * When you click load, try to interact with the application. Specifically, see if you can type in the
+     URL bar.
+   * Go ahead and click "Load". Notice how the application becomes completely unresponsive until the text displays.
+   * Wait for the text to display then close the application.
+   
+1. Take a few minutes to better understand the starter code that was given to you by drawing the scene graph that
+   is created then answering the following questions in your notes:
+   * What are the names of the JavaFX components that hold the text?
+   * What is the name of the method that is called when the button is clicked? In other words, what method serves as 
+     the event handler for the button?
+   * What part of the event handler method takes the longest to complete?
+   
+1. Remember, JavaFX applications run on the JavaFX Application Thread. However, when we have a long-running event
+   handler, we need to move that event handler to a separate thread so the JavaFX Application Thread can continue 
+   updating the GUI while the long-running handler is executing.
+   
+1. Modify the code so that a new thread is created and runs the `loadPage` method when the button is clicked. Do not
+   include any calls to `Platform.runLater` at this time.
+   
+1. Compile and run the application with the given compile script and then click the "Load" button. You should see an
+   error message similar to the following
+   
    ```
-                                                             --|
-                         Stage                                 |
-                           |                                   |
-                         Scene                                 |
-          |--              |                                   | Overall
-          |               HBox                                 | Containment
-   Scene  |                |\                                  | Hierarchy
-   Graph  |                | \------------------\              |
-          |                |                    |              |
-          |           ImageLoader          ImageLoader         |
-          |--                                                --|
+   java.lang.IllegalStateException: Not on FX application thread; currentThread = Thread-3
+    at com.sun.javafx.tk.Toolkit.checkFxUserThread (Toolkit.java:291)
+    at com.sun.javafx.tk.quantum.QuantumToolkit.checkFxUserThread (QuantumToolkit.java:424)
+    at javafx.scene.Parent$3.onProposedChange (Parent.java:471)
+    at com.sun.javafx.collections.VetoableListDecorator.clear (VetoableListDecorator.java:294)
+    at cs1302.app.QuizApp.loadPage (QuizApp.java:77)
+    at cs1302.app.QuizApp.lambda$init$0 (QuizApp.java:50)
+    at java.lang.Thread.run (Thread.java:833)
    ```
-
-1. Compile and run the code using [Maven](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/maven.md) commands.
-
-   **NOTE:** The starter code includes a `module-info.java` file for the `cs1302.hw08` module. If you
-   encounter an "unnamed module" error when using `mvn exec:java`, then use `cs1302.hw08/cs1302.hw08.ImageDriver`
-   for the value of the `-Dexec.mainClass` option instead of `cs1302.hw08.ImageDriver`.
-
-1. Create a compile script so you don't have to retype those commands each time.
-
-1. Stage and commit your compile script then tag your commit so that it's easier to checkout
-   at a later point in time:
-
-   ```
-   $ git tag tutorial
-   ```
-
-   [Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging) allows us
-   to give the commit a more convenient name to a commit than its
-   hexademical checksum.
+   
+   This error is telling you that the code on line 77 (may be slightly different in your output) needs to be run
+   from the JavaFX Application Thread. Notice that the code on line 77 modifies the `TextFlow` object which also
+   modifies the scene graph. 
+   
+   Any code that modifies the scene graph must run on the JavaFX Application Thread. In this case, we just need to
+   move that line back to the JavaFX Application Thread by using 
+   [`Platform.runLater()`](https://openjfx.io/javadoc/17/javafx.graphics/javafx/application/Platform.html#runLater(java.lang.Runnable)).
+   
+1. Go ahead and add the call to `Platform.runLater` to the line that caused the problem and then compile and run again. If
+   the same error occurs at a different location, go ahead and add `Platform.runLater` to that line as well.
+   
+1. Once you are confident that you have rid your program of errors, test your program by making sure you can interact with the
+   `TextField` while the data is downloading. If that works, try a different URL for another book.
+   
+1. Congratulations on building an application that uses threads!
 
 <hr/>
 
@@ -91,126 +107,11 @@ will serve as a helpful study guide for the exam.
 
 <hr/>
 
-### Checkpoint 2 Steps
-
-1. Now, read the class-level API documentation for the
-   [`TilePane`](https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/layout/TilePane.html)
-   class, then adapt your code to replace the highest `HBox` in the
-   containment hierarchy with a `TilePane` object.
-
-   * The `TilePane` object's `prefColumns` should be set to `2` using the appropriate setter
-     method.
-
-   * The `TilePane` object should have four `ImageLoader` objects as its children.
-
-   Here is the corresponding containment hierarchy for what is expected:
-
-   ```
-                                                             --|
-                              Stage                            |
-                                |                              |
-                              Scene                            |
-          |--                   |                              | Overall
-          |                 TilePane                           | Containment
-   Scene  |                    /|\                             | Hierarchy
-   Graph  |          /--------/ | \--------\                   |
-          |         /          / \          \                  |
-          |      ImageLoader  /   \        ImageLoader         |
-          |                  /     \                           |
-          |        ImageLoader     ImageLoader                 |
-          |--                                                --|
-   ```
-
-1. **Compile and run your code without any errors or warnings,
-   make sure it passes a `checkstyle` audit,
-   then stage and commit your changes.**
-
-1. Now, increase the number of `ImageLoader` objects to `8`. This
-   should be easy if you used a loop.
-
-1. **Compile and run your code without any errors or warnings,
-   make sure it passes a `checkstyle` audit,
-   then stage and commit your changes.** If your GUI goes off the sides of your screen, don't worry, it will
-   look fine on a higher-resolution display. Feel free to change the number of `ImageLoader` objects back
-   to 4 before submitting.
-
-1. Commit these changes then tag your commit so that it's easier to checkout
-   at a later point in time:
-
-   ```
-   $ git tag tilepane
-   ```
-
-<hr/>
-
-![CP](https://img.shields.io/badge/Just%20Finished%20Checkpoint-2-success?style=for-the-badge)
-
-<hr/>
-
-### Checkpoint 3 Steps
-
-1. Now, read the class-level API documentation for the
-   [`TabPane`](https://openjfx.io/javadoc/17/javafx.controls/javafx/scene/control/TabPane.html)
-   and [`Tab`](https://openjfx.io/javadoc/17/javafx.controls/javafx/scene/control/Tab.html)
-   classes, then adapt your code to replace the `TilePane` in the
-   containment hiearchy with a `TabPane` object.
-
-   * The `TabPane` object should have four `Tab` objects, each containing an `ImageLoader` object
-     as its child.
-
-   Here is the corresponding containment hierarchy for what is expected:
-
-   ```
-                                                             --|
-                              Stage                            |
-                                |                              |
-                              Scene                            |
-          |--                   |                              | Overall
-          |                  TabPane                           | Containment
-   Scene  |                    /|\                             | Hierarchy
-   Graph  |          /--------/ | \--------\                   |
-          |        Tab          |          Tab                 |
-          |        /           / \           \                 |
-          |     ImageLoader  Tab Tab         ImageLoader       |
-          |                  /     \                           |
-          |        ImageLoader     ImageLoader                 |
-          |--                                                --|
-   ```
-
-1. **Compile and run your code without any errors or warnings,
-   make sure it passes a `checkstyle` audit,
-   then stage and commit your changes.**
-
-1. Tag your commit so that it's easier to checkout at a later
-   point in time:
-
-   ```
-   $ git tag tabpane
-   ```
-
-1. View the condensed, graphical version of your Git log.
-   Since you tagged each relevant commit with a name, you
-   can go back in time by checking out those commits more
-   easily. For example,
-
-   ```
-   $ git checkout tutorial
-   ```
-
-   Then, compile and run to see what your exercise looked like
-   at that point in time!
-
-<hr/>
-
-![CP](https://img.shields.io/badge/Just%20Finished%20Checkpoint-3-success?style=for-the-badge)
-
-<hr/>
-
 ### Submission Steps
 
 **Each student needs to individually submit their own work.**
 
-1. Create a plain text file called `SUBMISSION.md` directly inside the `cs1302-hw08`
+1. Create a plain text file called `SUBMISSION.md` directly inside the `cs1302-hw8.5`
    directory with the following information:
 
    1. Your name and UGA ID number
@@ -221,14 +122,14 @@ will serve as a helpful study guide for the exam.
    Sally Smith (811-000-999)
    ```
 
-1. Change directories to the parent of `cs1302-hw08` (e.g., `cd ..` from `cs1302-hw08`). If you would like
+1. Change directories to the parent of `cs1302-hw8.5` (e.g., `cd ..` from `cs1302-hw8.5`). If you would like
    to make a backup tar file, the instructions are in the submissions steps for [hw01](https://github.com/cs1302uga/cs1302-hw01).
    We won't repeat those steps here and you can view them as optional.
 
 1. Use the `submit` command to submit this exercise to `csci-1302`:
 
    ```
-   $ submit cs1302-hw08 csci-1302
+   $ submit cs1302-hw8.5 csci-1302
    ```
 
    Read the output of the submit command very carefully. If there is an error while submitting, then it will displayed
