@@ -72,16 +72,16 @@ will serve as a helpful study guide for the exam.
    include any calls to `Platform.runLater` at this time.
    
 1. Compile and run the application with the given compile script and then click the "Load" button. You should see an
-   error message similar to the following
+   error message similar to the following (Note: you may have to close the window to see the error):
    
    ```
-   java.lang.IllegalStateException: Not on FX application thread; currentThread = Thread-3
-    at com.sun.javafx.tk.Toolkit.checkFxUserThread (Toolkit.java:291)
-    at com.sun.javafx.tk.quantum.QuantumToolkit.checkFxUserThread (QuantumToolkit.java:424)
-    at javafx.scene.Parent$3.onProposedChange (Parent.java:471)
-    at com.sun.javafx.collections.VetoableListDecorator.clear (VetoableListDecorator.java:294)
-    at cs1302.app.QuizApp.loadPage (QuizApp.java:77)
-    at cs1302.app.QuizApp.lambda$init$0 (QuizApp.java:50)
+    Caused by: java.lang.IllegalStateException: Not on FX application thread; currentThread = Thread-3
+    at com.sun.javafx.tk.Toolkit.checkFxUserThread (Toolkit.java:295)
+    at com.sun.javafx.tk.quantum.QuantumToolkit.checkFxUserThread (QuantumToolkit.java:458)
+    at javafx.scene.Parent$3.onProposedChange (Parent.java:474)
+    at com.sun.javafx.collections.VetoableListDecorator.clear (VetoableListDecorator.java:293)
+    at cs1302.reader.ReaderApp.loadPage (ReaderApp.java:91)
+    at cs1302.reader.ReaderApp.lambda$init$0 (ReaderApp.java:58)
     at java.lang.Thread.run (Thread.java:833)
    ```
    
