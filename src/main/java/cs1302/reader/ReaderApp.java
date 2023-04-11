@@ -16,6 +16,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * A JavaFX application that downloads a text file from a user specified URL and displays
+ * the contents in a graphical window. This version does not create any additional threads
+ * and all event handlers run on the JavaFX Application Thread. Students are responsible
+ * for modifying the code to ensure the app remains responsive while text downloads.
+ */
 public class ReaderApp extends Application {
 
     private static String DELAY_URL = "https://app.requestly.io/delay/5000/";
@@ -32,6 +38,9 @@ public class ReaderApp extends Application {
     protected Button urlButton;
     protected TextFlow textFlow;
 
+    /**
+     * Initializes the GUI components for the reader app.
+     */
     public ReaderApp() {
         mainPane = new VBox();
         urlPane = new HBox();
