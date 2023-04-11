@@ -85,8 +85,8 @@ will serve as a helpful study guide for the exam.
     at java.lang.Thread.run (Thread.java:833)
    ```
    
-   This error is telling you that the code on line 77 (may be slightly different in your output) needs to be run
-   from the JavaFX Application Thread. Notice that the code on line 77 modifies the `TextFlow` object which also
+   This error is telling you that the code on line 91 (may be slightly different in your output) needs to be run
+   from the JavaFX Application Thread. Notice that the code on line 91 modifies the `TextFlow` object which also
    modifies the scene graph. 
    
    Any code that modifies the scene graph must run on the JavaFX Application Thread. In this case, we just need to
