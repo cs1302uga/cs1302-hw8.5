@@ -99,6 +99,8 @@ will serve as a helpful study guide for the exam.
 1. Once you are confident that you have rid your program of errors, test your program by making sure you can interact with the
    `TextField` while the data is downloading. If that works, try a different URL for another book.
    
+1. Make sure your application works with an invalid URL (displays exception message in the `TextFlow`) and passes `check1302`.
+   
 1. Congratulations on building an application that uses threads!
 
 <hr/>
