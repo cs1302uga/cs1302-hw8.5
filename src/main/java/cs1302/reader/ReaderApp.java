@@ -29,69 +29,77 @@ public class ReaderApp extends Application {
     public static final String SHERLOCK =
         "https://www.gutenberg.org/files/1661/1661-0.txt";
 
-    protected Stage stage;
-    protected VBox mainPane;
-    protected HBox urlPane;
-    protected ScrollPane textPane;
+    Stage stage;
+    Scene scene;
 
-    protected TextField urlField;
-    protected Button urlButton;
-    protected TextFlow textFlow;
+    VBox root;
+
+    HBox urlPane;
+    TextField urlField;
+    Button loadButton;
+
+    ScrollPane textPane;
+    TextFlow textFlow;
 
     /**
      * Initializes the GUI components for the reader app.
      */
     public ReaderApp() {
-        mainPane = new VBox();
-        urlPane = new HBox();
-        textPane = new ScrollPane();
-
-        urlField = new TextField(SHERLOCK);
-        urlButton = new Button("Load");
-        textFlow = new TextFlow();
+        this.stage = null;
+        this.scene = null;
+        // scene nodes
+        this.root = new VBox();
+        this.urlPane = new HBox();
+        this.textPane = new ScrollPane();
+        this.urlField = new TextField(SHERLOCK);
+        this.loadButton = new Button("Load");
+        this.textFlow = new TextFlow();
     } // ReaderApp
 
     @Override
     public void init() {
-        HBox.setHgrow(urlField, Priority.ALWAYS);
-        urlButton.setOnAction(e -> loadPage());
-        urlPane.getChildren().addAll(urlField, urlButton);
-
-        textFlow.getChildren().add(new Text("Click \"Load\" to load the .txt file..."));
-        textFlow.setMaxWidth(630);
-        textPane.setPrefHeight(480);
-        textPane.setContent(textFlow);
-
-        mainPane.getChildren().addAll(urlPane, textPane);
+        // initialize url pane
+        HBox.setHgrow(this.urlField, Priority.ALWAYS);
+        this.urlPane.getChildren().addAll(this.urlField, this.loadButton);
+        // initialize the text flow
+        this.textFlow.getChildren().add(new Text("Click \"Load\" to load the .txt file..."));
+        this.textFlow.setMaxWidth(630);
+        this.textPane.setPrefHeight(480);
+        this.textPane.setContent(this.textFlow);
+        // initialize the root node
+        this.root.getChildren().addAll(this.urlPane, this.textPane);
+        this.loadButton.setOnAction(event -> this.loadPage());
     } // init
 
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-
-        stage.setScene(new Scene(mainPane, 640, 480));
-        stage.sizeToScene();
-        stage.setTitle("ExampleApp!");
-        stage.show();
+        this.scene = new Scene(root, 640, 480);
+        this.stage.setScene(this.scene);
+        this.stage.sizeToScene();
+        this.stage.setTitle("ExampleApp!!");
+        this.stage.show();
     } // start
 
     /**
      * Students will add an appropriate Javadoc comment for this method.
      */
     private void loadPage() {
-        urlButton.setDisable(true);
-        textFlow.getChildren().clear();
+        this.loadButton.setDisable(true);
+        this.textFlow.getChildren().clear();
         try {
-            URL url = new URL(DELAY_URL + urlField.getText());
+            URL url = new URL(DELAY_URL + this.urlField.getText());
             Scanner site = new Scanner(url.openStream());
             while (site.hasNextLine()) {
                 String line = site.nextLine();
-                textFlow.getChildren().add(new Text(line + "\n"));
+                Text lineText = new Text(line + "\n");
+                this.textFlow.getChildren().add(lineText);
             } // while
         } catch (IOException ex) {
-            textFlow.getChildren().add(new Text(ex.getMessage()));
+            Text errorText = new Text(ex.getMessage());
+            this.textFlow.getChildren().add(errorText);
         } // try
-        urlButton.setDisable(false);
+        this.loadButton.setDisable(false);
     } // loadPage
 
 } // ReaderApp
