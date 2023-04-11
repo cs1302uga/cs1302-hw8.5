@@ -75,6 +75,9 @@ public class ReaderApp extends Application {
         stage.show();
     } // start
 
+    /**
+     * Students will add an appropriate Javadoc comment for this method.
+     */
     private void loadPage() {
         urlButton.setDisable(true);
         textFlow.getChildren().clear();
