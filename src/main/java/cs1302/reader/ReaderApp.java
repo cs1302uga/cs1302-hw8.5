@@ -1,4 +1,4 @@
-package cs1302.app;
+package cs1302.reader;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -16,13 +16,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class QuizApp extends Application {
+public class ReaderApp extends Application {
 
     private static String DELAY_URL = "https://app.requestly.io/delay/5000/";
 
     public static final String SHERLOCK =
         "https://www.gutenberg.org/files/1661/1661-0.txt";
-        //"http://cobweb.cs.uga.edu/~mec/cs1302/gui/doyle_bohemia.txt";
 
     protected Stage stage;
     protected VBox mainPane;
@@ -33,7 +32,7 @@ public class QuizApp extends Application {
     protected Button urlButton;
     protected TextFlow textFlow;
 
-    public QuizApp() {
+    public ReaderApp() {
         mainPane = new VBox();
         urlPane = new HBox();
         textPane = new ScrollPane();
@@ -41,7 +40,7 @@ public class QuizApp extends Application {
         urlField = new TextField(SHERLOCK);
         urlButton = new Button("Load");
         textFlow = new TextFlow();
-    } // QuizApp
+    } // ReaderApp
 
     @Override
     public void init() {
@@ -83,4 +82,4 @@ public class QuizApp extends Application {
         urlButton.setDisable(false);
     } // loadPage
 
-} // QuizApp
+} // ReaderApp

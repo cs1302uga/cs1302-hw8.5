@@ -4,25 +4,28 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>cs1302.q12</groupId>
-  <artifactId>quiz12</artifactId>
+  <groupId>cs1302.reader</groupId>
+  <artifactId>cs1302-reader</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>quiz12</name>
+  <name>cs1302-reader</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <exec.mainClass>cs1302.reader/cs1302.reader.ReaderDriver</exec.mainClass>
+    <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+    <exec.args>-Dprism.order=sw</exec.args>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>11</version>
+      <version>17.0.2</version>
     </dependency>
   </dependencies>
 
