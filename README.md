@@ -1,6 +1,6 @@
 # cs1302-hw8.5 Threaded Reader App
 
-![Approved for: Spring 2023](https://img.shields.io/badge/Approved%20for-Spring%202023-magenta)
+![Approved for: Fall 2023](https://img.shields.io/badge/Approved%20for-Fall%202023-green)
 
 This homework explores creating responsive graphical user interfaces (GUIs) using the JavaFX library and Java threads. 
 The application displays the contents of a text (`.txt`) found at the URL provided by the user. However, the starter code 
