@@ -47,7 +47,7 @@ will serve as a helpful study guide for the exam.
    [Maven](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/maven.md) commands.
 
 1. The default URL in the application points to a plain-text UTF-8 version of __The Adventures of Sherlock
-   Holmes__ by Sir Arthur Conan Doyle. **Before you click load please note:**
+   Holmes__ by Sir Arthur Conan Doyle. **Before you click load, please note:**
    * We have added artificial delay to the application, so downloading the text will take longer than usual. 
      The delay will help us see the impact of long-running event handlers. In this case, the long-running
      event handler runs when the button is clicked. While the event handler is executing (to download the text),
@@ -55,10 +55,10 @@ will serve as a helpful study guide for the exam.
    * When you click load, try to interact with the application. Specifically, see if you can type in the
      URL bar.
    * Go ahead and click "Load". Notice how the application becomes completely unresponsive until the text displays.
-   * Wait for the text to display then close the application.
+   * Wait for the text to display and then close the application.
    
 1. Take a few minutes to better understand the starter code that was given to you by drawing the scene graph that
-   is created then answering the following questions in your notes:
+   is created. Then answer the following questions in your notes:
    * What are the names of the JavaFX components that hold the text?
    * What is the name of the method that is called when the button is clicked? In other words, what method serves as 
      the event handler for the button?
@@ -72,7 +72,7 @@ will serve as a helpful study guide for the exam.
    include any calls to `Platform.runLater` at this time.
    
 1. Compile and run the application with the given compile script and then click the "Load" button. You should see an
-   error message similar to the following (Note: you may have to close the window to see the error):
+   error message similar to the following (you may have to close the window to see the error):
    
    ```
     Caused by: java.lang.IllegalStateException: Not on FX application thread; currentThread = Thread-3
@@ -125,7 +125,7 @@ will serve as a helpful study guide for the exam.
    ```
 
 1. Change directories to the parent of `cs1302-hw8.5` (e.g., `cd ..` from `cs1302-hw8.5`). If you would like
-   to make a backup tar file, the instructions are in the submissions steps for [hw01](https://github.com/cs1302uga/cs1302-hw01).
+   to make a backup `.tar` file, the instructions are in the submission steps for [hw01](https://github.com/cs1302uga/cs1302-hw01).
    We won't repeat those steps here and you can view them as optional.
 
 1. Use the `submit` command to submit this exercise to `csci-1302`:
@@ -136,8 +136,8 @@ will serve as a helpful study guide for the exam.
 
    Read the output of the submit command very carefully. If there is an error while submitting, then it will displayed
    in that output. Additionally, if successful, the `submit` command creates a new receipt file in the directory you
-   submitted. The receipt file begins with rec and contains a detailed list of all files that were successfully submitted.
-   Look through the contents of the rec file and always remember to keep that file in case there is an issue with your submission.
+   submitted. The receipt file begins with "rec" and contains a detailed list of all files that were successfully submitted.
+   Look through the contents of the receipt file and always remember to keep that file in case there is an issue with your submission.
 
    **Note:** You must be on Odin to submit.
 
