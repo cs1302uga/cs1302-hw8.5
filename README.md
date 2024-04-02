@@ -1,6 +1,6 @@
 # cs1302-hw8.5 Threaded Reader App
 
-![Approved for: Fall 2023](https://img.shields.io/badge/Approved%20for-Fall%202023-green)
+![Approved for: Spring 2024](https://img.shields.io/badge/Approved%20for-Spring%202024-blue)
 
 This homework explores creating responsive graphical user interfaces (GUIs) using the JavaFX library and Java threads. 
 The application displays the contents of a text (`.txt`) found at the URL provided by the user. However, the starter code 
@@ -22,7 +22,7 @@ Students must use Java threads to ensure that the GUI remains responsive while t
 In your notes, clearly answer the following questions. These instructions assume that you are
 logged into the Odin server.
 
-**NOTE:** For each step, please provide in your notes the full command that you typed to make the related
+**NOTE:** For each step, please provide in your notes the full command you typed to make the related
 action happen along with an explanation of why that command worked. Some commands require multiple options.
 It is important to not only recall what you typed but also why you typed each of them. If context is necessary
 (e.g., the command depends on your present working directory), then please note that context as well.
@@ -48,7 +48,7 @@ will serve as a helpful study guide for the exam.
 
 1. The default URL in the application points to a plain-text UTF-8 version of __The Adventures of Sherlock
    Holmes__ by Sir Arthur Conan Doyle. **Before you click load, please note:**
-   * We have added artificial delay to the application, so downloading the text will take longer than usual. 
+   * We have added an artificial delay to the application, so downloading the text will take longer than usual. 
      The delay will help us see the impact of long-running event handlers. In this case, the long-running
      event handler runs when the button is clicked. While the event handler is executing (to download the text),
      nothing else can occur in the application.
@@ -57,8 +57,8 @@ will serve as a helpful study guide for the exam.
    * Go ahead and click "Load". Notice how the application becomes completely unresponsive until the text displays.
    * Wait for the text to display and then close the application.
    
-1. Take a few minutes to better understand the starter code that was given to you by drawing the scene graph that
-   is created. Then answer the following questions in your notes:
+1. Take a few minutes to better understand the starter code that was given to you by drawing the scene graph it
+   creates. Then answer the following questions in your notes:
    * What are the names of the JavaFX components that hold the text?
    * What is the name of the method that is called when the button is clicked? In other words, what method serves as 
      the event handler for the button?
@@ -85,7 +85,7 @@ will serve as a helpful study guide for the exam.
     at java.lang.Thread.run (Thread.java:833)
    ```
    
-   This error is telling you that the code on line 91 (may be slightly different in your output) needs to be run
+   This error tells you that the code on line 91 (may be slightly different in your output) needs to be run
    from the JavaFX Application Thread. Notice that the code on line 91 modifies the `TextFlow` object which also
    modifies the scene graph. 
    
