@@ -1,6 +1,6 @@
 # cs1302-hw8.5 Threaded Reader App
 
-![Approved for: Spring 2024](https://img.shields.io/badge/Approved%20for-Spring%202024-blue)
+![Approved for: Fall 2024](https://img.shields.io/badge/Approved%20for-Fall%202024-green)
 
 This homework explores creating responsive graphical user interfaces (GUIs) using the JavaFX library and Java threads. 
 The application displays the contents of a text (`.txt`) found at the URL provided by the user. However, the starter code 
@@ -13,8 +13,8 @@ Students must use Java threads to ensure that the GUI remains responsive while t
 
 ## References and Prerequisites
 
-* [CSCI 1302 JavaFX Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/javafx/javafx.md)
-* [CSCI 1302 Threads Tutorial](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/threads/brief-intro-threads.md)
+* [CSCI 1302 JavaFX Chapter](https://cs1302uga.github.io/cs1302-book/java/javafx/javafx-index.html)
+* [CSCI 1302 Threads Chapter](https://cs1302uga.github.io/cs1302-book/java/threads/threads-index.html)
 * [JavaFX API Documentation](https://openjfx.io/javadoc/17/)
 
 ## Questions
@@ -44,7 +44,7 @@ will serve as a helpful study guide for the exam.
 1. Take a few minutes to look over the starter code provided to you.
 
 1. Compile and run the code using the provided compile script (`compile.sh`) which uses 
-   [Maven](https://github.com/cs1302uga/cs1302-tutorials/blob/alsi/maven.md) commands.
+   [Maven](https://cs1302uga.github.io/cs1302-book/tools/maven/maven-index.html) commands.
 
 1. The default URL in the application points to a plain-text UTF-8 version of __The Adventures of Sherlock
    Holmes__ by Sir Arthur Conan Doyle. **Before you click load, please note:**
